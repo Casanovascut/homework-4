@@ -1,5 +1,8 @@
 const startButton = document.getElementById('start-button')
 const questionContainerElement = document.getElementById('question-container')
+const questionElement = document.getElementById('question')
+const answerButtonElement = document.getElementById('answer-buttons')
+
 
 let shuffledQuestions, currentQuestionIndex
 
@@ -14,8 +17,13 @@ function startQuiz(){
 }
 
 function setNextQuestion(){
-
+    showQuestion(shuffledQuestions[currentQuestionIndex])
 }
+
+function showQuestion(question){
+    questionElement.innerText = question.question
+}
+
 function selectAnswer(){
 
 }
@@ -28,9 +36,9 @@ const questions = [
     {
         question: 'what does JS stand for?',
         answers:  [
-        { text: 'javascript', correct: true}
-        { text: 'jobs suck', correct:false}
-        { text: 'jorgan sorgan', correct:false}
+        { text: 'javascript', correct: true},
+        { text: 'jobs suck', correct:false},
+        { text: 'jorgan sorgan', correct:false},
         { text: 'jeez sally', correct: false}
         ]
     }
