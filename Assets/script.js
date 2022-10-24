@@ -28,9 +28,9 @@ function showQuestion(question){
         const button = document.createElement('button')
         button.innerText = answer.text
         button.classList.add('btn')
-        if (answer.correct){
-            button.dataset.correct = answer.correct
-        }
+        
+        
+        button.dataset.correct = answer.correct
         button.addEventListener('click', selectAnswer)
         answerButtonElement.appendChild(button)
     });
@@ -46,11 +46,9 @@ function resetState(){
 
 function selectAnswer(e){
     const selectedButton = e.target
-    const correct = selectedButton.dataset.correct
+    const correct = selectedButton.dataset.correct == 'true'
     setStatusClass(document.body, correct)
-    Array.from(answerButtonElement.children).forEach(button=>{
-        setStatusClass(button, button.dataset.correct)
-    })
+    console.log(correctAnswers)
 
         
     
@@ -59,7 +57,7 @@ function selectAnswer(e){
 function setStatusClass(element,correct){
     if (correct){
         correctAnswers++
-    }console.log(correctAnswers)
+    }
 }
 
 function returnGrade(){
