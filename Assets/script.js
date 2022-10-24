@@ -1,8 +1,9 @@
 const startButton = document.getElementById('start-button')
+const nextButton = document.getElementById('next-button')
 const questionContainerElement = document.getElementById('question-container')
 const questionElement = document.getElementById('question')
 const answerButtonElement = document.getElementById('answer-buttons')
-
+var correctAnswers = 0
 
 let shuffledQuestions, currentQuestionIndex
 
@@ -17,15 +18,48 @@ function startQuiz(){
 }
 
 function setNextQuestion(){
+    resetState()
     showQuestion(shuffledQuestions[currentQuestionIndex])
 }
 
 function showQuestion(question){
     questionElement.innerText = question.question
+    question.answers.forEach(answer => {
+        const button = document.createElement('button')
+        button.innerText = answer.text
+        button.classList.add('btn')
+        if (answer.correct){
+            button.dataset.correct = answer.correct
+        }
+        button.addEventListener('click', selectAnswer)
+        answerButtonElement.appendChild(button)
+    });
 }
 
-function selectAnswer(){
+function resetState(){
+    nextButton.classList.add('hide')
+    while (answerButtonElement.firstChild){
+        answerButtonElement.removeChild
+        (answerButtonElement.firstChild)
+    }
+}
 
+function selectAnswer(e){
+    const selectedButton = e.target
+    const correct = selectedButton.dataset.correct
+    setStatusClass(document.body, correct)
+    Array.from(answerButtonElement.children).forEach(button=>{
+        setStatusClass(button, button.dataset.correct)
+    })
+
+        
+    
+}
+
+function setStatusClass(element,correct){
+    if (correct){
+        correctAnswers++
+    }console.log(correctAnswers)
 }
 
 function returnGrade(){
