@@ -58,8 +58,6 @@ function selectAnswer(e){
     } else {
         question.innerText = 'your grade is ' + correctAnswers*25+'%'
         question.style.color = "blue"
-        startButton.innerText ='restart'
-        startButton.classList.remove('hide')
         answerButtonElement.classList.add('hide')
     }
 }
