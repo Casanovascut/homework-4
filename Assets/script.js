@@ -3,11 +3,15 @@ const nextButton = document.getElementById('next-button')
 const questionContainerElement = document.getElementById('question-container')
 const questionElement = document.getElementById('question')
 const answerButtonElement = document.getElementById('answer-buttons')
-var correctAnswers = 0
+let correctAnswers = 0
 
 let shuffledQuestions, currentQuestionIndex
 
 startButton.addEventListener('click',startQuiz)
+nextButton.addEventListener('click',()=>{
+    currentQuestionIndex++
+    setNextQuestion()
+})
 
 function startQuiz(){
     startButton.classList.add('hide') 
@@ -47,22 +51,28 @@ function resetState(){
 function selectAnswer(e){
     const selectedButton = e.target
     const correct = selectedButton.dataset.correct == 'true'
-    setStatusClass(document.body, correct)
-    console.log(correctAnswers)
+    createGrade(correct)
 
-        
-    
+    if (shuffledQuestions.length > currentQuestionIndex + 1){
+    nextButton.classList.remove('hide')
+    } else {
+        question.innerText = 'your grade is ' + correctAnswers*25+'%'
+        question.style.color = "blue"
+        startButton.innerText ='restart'
+        startButton.classList.remove('hide')
+        answerButtonElement.classList.add('hide')
+    }
 }
 
-function setStatusClass(element,correct){
+
+
+function createGrade(correct){
     if (correct){
         correctAnswers++
     }
 }
 
-function returnGrade(){
 
-}
 
 const questions = [
     {
@@ -72,6 +82,33 @@ const questions = [
         { text: 'jobs suck', correct:false},
         { text: 'jorgan sorgan', correct:false},
         { text: 'jeez sally', correct: false}
+        ]
+    },
+    {
+        question: 'Do you like to code?',
+        answers:  [
+        { text: 'No', correct: false},
+        { text: 'Maybe', correct:false},
+        { text: 'I dont like anything', correct:false},
+        { text: 'Yes!!', correct: true}
+        ]
+    },
+    {
+        question: 'is HTML considered a programming language?',
+        answers:  [
+        { text: 'No', correct: true},
+        { text: 'Maybe', correct:false},
+        { text: 'who cares', correct:false},
+        { text: 'Yes!!', correct: false}
+        ]
+    },
+    {
+        question: 'is this quiz any good?',
+        answers:  [
+        { text: 'No', correct: false},
+        { text: 'Maybe', correct:true},
+        { text: 'It sucks', correct:false},
+        { text: 'Yes!!', correct: false}
         ]
     }
 ]
